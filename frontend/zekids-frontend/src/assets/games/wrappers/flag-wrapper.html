@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlagMatch Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+        }
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            gap: 10px;
+            margin: 30px auto;
+            justify-content: center;
+        }
+        .card {
+            width: 100px;
+            height: 100px;
+            background: #fa709a;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card.flipped {
+            background: white;
+            border: 3px solid #fa709a;
+        }
+        .card.matched {
+            background: #4ade80;
+            cursor: default;
+        }
+        .card .back {
+            display: block;
+        }
+        .card .front {
+            display: none;
+        }
+        .card.flipped .back {
+            display: none;
+        }
+        .card.flipped .front {
+            display: block;
+        }
+        button {
+            background: #fa709a;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #e85d87;
+            transform: scale(1.05);
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fa709a;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FlagMatch (Demo)</h1>
+        <div class="game-board" id="gameBoard"></div>
+        <div class="score" id="score">Eşleşme: 0 / 6</div>
+        <button id="startBtn" onclick="startGame()">Oyunu Başlat</button>
+    </div>
+
+    <script>
+        let gameStartTime;
+        let matches = 0;
+        let flippedCards = [];
+        let canFlip = true;
+        let cards = [];
+
+        const flags = ['🇹🇷', '🇺🇸', '🇬🇧', '🇫🇷', '🇩🇪', '🇯🇵'];
+
+        function startGame() {
+            document.getElementById('startBtn').style.display = 'none';
+            gameStartTime = Date.now();
+            matches = 0;
+            createBoard();
+        }
+
+        function createBoard() {
+            const board = document.getElementById('gameBoard');
+            board.innerHTML = '';
+            cards = [];
+
+            // Create pairs
+            const cardValues = [...flags, ...flags];
+            cardValues.sort(() => Math.random() - 0.5);
+
+            cardValues.forEach((flag, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.value = flag;
+                card.dataset.index = index;
+                card.innerHTML = `
+                    <span class="back">❓</span>
+                    <span class="front">${flag}</span>
+                `;
+                card.addEventListener('click', () => flipCard(index));
+                board.appendChild(card);
+                cards.push({ value: flag, matched: false });
+            });
+        }
+
+        function flipCard(index) {
+            if (!canFlip) return;
+            
+            const card = document.querySelector(`[data-index="${index}"]`);
+            if (card.classList.contains('flipped') || card.classList.contains('matched')) {
+                return;
+            }
+
+            card.classList.add('flipped');
+            flippedCards.push({ index, value: cards[index].value, element: card });
+
+            if (flippedCards.length === 2) {
+                canFlip = false;
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+
+            if (card1.value === card2.value) {
+                // Match!
+                card1.element.classList.add('matched');
+                card2.element.classList.add('matched');
+                cards[card1.index].matched = true;
+                cards[card2.index].matched = true;
+                matches++;
+                updateScore();
+                flippedCards = [];
+                canFlip = true;
+
+                if (matches === 6) {
+                    endGame();
+                }
+            } else {
+                // No match
+                setTimeout(() => {
+                    card1.element.classList.remove('flipped');
+                    card2.element.classList.remove('flipped');
+                    flippedCards = [];
+                    canFlip = true;
+                }, 1000);
+            }
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = `Eşleşme: ${matches} / 6`;
+        }
+
+        function endGame() {
+            const duration = Date.now() - gameStartTime;
+            const score = 100;
+
+            document.getElementById('score').textContent = `✅ Tamamlandı! Süre: ${(duration / 1000).toFixed(1)}s`;
+
+            // Send data to parent
+            setTimeout(() => {
+                window.parent.postMessage({
+                    type: 'game-complete',
+                    gameId: 'flag-match',
+                    data: {
+                        score: score,
+                        duration: duration,
+                        rawData: {
+                            matches: matches,
+                            totalPairs: 6
+                        }
+                    }
+                }, '*');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

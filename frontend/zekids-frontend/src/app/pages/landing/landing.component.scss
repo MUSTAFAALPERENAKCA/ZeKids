@@ -1,0 +1,12 @@
+// Tactile Maximalism styles
+button, a {
+  transition: all 0.2s ease-in-out;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.hover\:shadow-xl:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}

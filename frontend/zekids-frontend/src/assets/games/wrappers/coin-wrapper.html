@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Marksman Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+        }
+        .target {
+            width: 100px;
+            height: 100px;
+            background: #f5576c;
+            border-radius: 50%;
+            margin: 40px auto;
+            cursor: crosshair;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .target:hover {
+            transform: scale(1.1);
+        }
+        .target.hit {
+            background: #4ade80;
+        }
+        button {
+            background: #f5576c;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #e04560;
+            transform: scale(1.05);
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f5576c;
+            margin-top: 20px;
+        }
+        .timer {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Coin Marksman (Demo)</h1>
+        <div class="timer" id="timer">Süre: 30 saniye</div>
+        <div class="target" id="target"></div>
+        <div class="score" id="score">Skor: 0 / 0</div>
+        <button id="startBtn" onclick="startGame()">Oyunu Başlat</button>
+    </div>
+
+    <script>
+        let gameStartTime;
+        let score = 0;
+        let attempts = 0;
+        let timeLeft = 30;
+        let gameInterval;
+        let timerInterval;
+        let gameActive = false;
+
+        function startGame() {
+            document.getElementById('startBtn').style.display = 'none';
+            gameStartTime = Date.now();
+            score = 0;
+            attempts = 0;
+            timeLeft = 30;
+            gameActive = true;
+            updateScore();
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').textContent = `Süre: ${timeLeft} saniye`;
+                
+                if (timeLeft <= 0) {
+                    endGame();
+                }
+            }, 1000);
+
+            moveTarget();
+        }
+
+        function moveTarget() {
+            if (!gameActive) return;
+            
+            const target = document.getElementById('target');
+            const container = document.querySelector('.container');
+            
+            // Random position
+            const maxX = container.clientWidth - 120;
+            const maxY = 200;
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            
+            target.style.position = 'absolute';
+            target.style.left = x + 'px';
+            target.style.top = (y + 100) + 'px';
+        }
+
+        document.getElementById('target').addEventListener('click', () => {
+            if (!gameActive) return;
+            
+            score++;
+            attempts++;
+            updateScore();
+            
+            const target = document.getElementById('target');
+            target.classList.add('hit');
+            setTimeout(() => {
+                target.classList.remove('hit');
+            }, 200);
+            
+            moveTarget();
+        });
+
+        document.querySelector('.container').addEventListener('click', (e) => {
+            if (!gameActive) return;
+            if (e.target.id !== 'target') {
+                attempts++;
+                updateScore();
+            }
+        });
+
+        function updateScore() {
+            document.getElementById('score').textContent = `Skor: ${score} / ${attempts}`;
+        }
+
+        function endGame() {
+            gameActive = false;
+            clearInterval(timerInterval);
+            
+            const duration = Date.now() - gameStartTime;
+            const accuracy = attempts > 0 ? (score / attempts * 100).toFixed(1) : 0;
+            
+            document.getElementById('timer').textContent = '✅ Oyun Bitti!';
+            document.getElementById('score').textContent = 
+                `Final Skor: ${score} / ${attempts} (${accuracy}% isabetli)`;
+
+            // Send data to parent
+            setTimeout(() => {
+                window.parent.postMessage({
+                    type: 'game-complete',
+                    gameId: 'coin-marksman',
+                    data: {
+                        score: score,
+                        duration: duration,
+                        accuracy: parseFloat(accuracy),
+                        rawData: {
+                            hits: score,
+                            attempts: attempts
+                        }
+                    }
+                }, '*');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

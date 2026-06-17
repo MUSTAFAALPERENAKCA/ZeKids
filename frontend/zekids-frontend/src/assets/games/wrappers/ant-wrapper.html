@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANT Test Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+        }
+        .stimulus {
+            font-size: 80px;
+            margin: 40px 0;
+            min-height: 100px;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 20px;
+        }
+        .instructions {
+            color: #666;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dikkat Testi (Demo)</h1>
+        <div class="instructions" id="instructions">
+            Ekranda ok göründüğünde, okun yönüne göre tuşa basın.<br>
+            ← için Sol, → için Sağ tuşunu kullanın
+        </div>
+        <div class="stimulus" id="stimulus"></div>
+        <div class="score" id="score"></div>
+        <button id="startBtn" onclick="startTest()">Teste Başla</button>
+    </div>
+
+    <script>
+        let gameStartTime;
+        let trials = [];
+        let currentTrial = 0;
+        let reactionTimes = [];
+        let stimulusStartTime;
+        let totalTrials = 10;
+
+        const stimuli = ['←', '→', '←', '→', '←', '→', '←', '→', '←', '→'];
+
+        function startTest() {
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('instructions').style.display = 'none';
+            gameStartTime = Date.now();
+            currentTrial = 0;
+            reactionTimes = [];
+            showNextStimulus();
+        }
+
+        function showNextStimulus() {
+            if (currentTrial >= totalTrials) {
+                endGame();
+                return;
+            }
+
+            // Blank screen
+            document.getElementById('stimulus').textContent = '';
+            
+            setTimeout(() => {
+                // Show stimulus
+                document.getElementById('stimulus').textContent = stimuli[currentTrial];
+                stimulusStartTime = Date.now();
+            }, 500 + Math.random() * 1000);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!stimulusStartTime) return;
+
+            const stimulus = stimuli[currentTrial];
+            const rt = Date.now() - stimulusStartTime;
+            
+            let correct = false;
+            if ((e.key === 'ArrowLeft' && stimulus === '←') ||
+                (e.key === 'ArrowRight' && stimulus === '→')) {
+                correct = true;
+            }
+
+            if (correct) {
+                reactionTimes.push(rt);
+            }
+
+            stimulusStartTime = null;
+            currentTrial++;
+            showNextStimulus();
+        });
+
+        function endGame() {
+            const duration = Date.now() - gameStartTime;
+            const score = reactionTimes.length;
+            
+            document.getElementById('stimulus').innerHTML = '✅<br>Test Tamamlandı!';
+            document.getElementById('score').textContent = 
+                `Skor: ${score}/${totalTrials} | Ortalama RT: ${(reactionTimes.reduce((a,b) => a+b, 0) / reactionTimes.length).toFixed(0)}ms`;
+
+            // Send data to parent (Angular)
+            setTimeout(() => {
+                window.parent.postMessage({
+                    type: 'game-complete',
+                    gameId: 'ant-test',
+                    data: {
+                        score: score,
+                        duration: duration,
+                        reactionTimes: reactionTimes,
+                        rawData: {
+                            trials: totalTrials,
+                            correct: score
+                        }
+                    }
+                }, '*');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

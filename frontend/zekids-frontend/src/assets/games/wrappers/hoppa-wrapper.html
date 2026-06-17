@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoppa Platformer Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+        }
+        .game-area {
+            width: 500px;
+            height: 300px;
+            background: #87ceeb;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .player {
+            width: 40px;
+            height: 40px;
+            background: #ff6b6b;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+            transition: all 0.1s;
+        }
+        .platform {
+            width: 100px;
+            height: 20px;
+            background: #8b4513;
+            position: absolute;
+            border-radius: 5px;
+        }
+        .coin {
+            width: 30px;
+            height: 30px;
+            background: #ffd700;
+            border-radius: 50%;
+            position: absolute;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 20px;
+        }
+        .controls {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hoppa Platformer (Demo)</h1>
+        <div class="controls">← → Hareket | Boşluk Zıpla</div>
+        <div class="game-area" id="gameArea">
+            <div class="player" id="player"></div>
+        </div>
+        <div class="score" id="score">Skor: 0</div>
+        <button id="startBtn" onclick="startGame()">Oyunu Başlat</button>
+    </div>
+
+    <script>
+        let gameStartTime;
+        let score = 0;
+        let playerX = 50;
+        let playerY = 250;
+        let velocityY = 0;
+        let isJumping = false;
+        let gameActive = false;
+        let coins = [];
+        let gameInterval;
+
+        const keys = {};
+
+        document.addEventListener('keydown', (e) => {
+            keys[e.key] = true;
+            if (e.key === ' ' && !isJumping && gameActive) {
+                velocityY = -15;
+                isJumping = true;
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            keys[e.key] = false;
+        });
+
+        function startGame() {
+            document.getElementById('startBtn').style.display = 'none';
+            gameStartTime = Date.now();
+            score = 0;
+            gameActive = true;
+            spawnCoins();
+            gameLoop();
+        }
+
+        function spawnCoins() {
+            const gameArea = document.getElementById('gameArea');
+            for (let i = 0; i < 5; i++) {
+                const coin = document.createElement('div');
+                coin.className = 'coin';
+                coin.textContent = '💰';
+                coin.style.left = (100 + i * 100) + 'px';
+                coin.style.top = (50 + Math.random() * 150) + 'px';
+                gameArea.appendChild(coin);
+                coins.push({
+                    element: coin,
+                    x: 100 + i * 100,
+                    y: 50 + Math.random() * 150,
+                    collected: false
+                });
+            }
+        }
+
+        function gameLoop() {
+            if (!gameActive) return;
+
+            // Movement
+            if (keys['ArrowLeft']) {
+                playerX = Math.max(0, playerX - 5);
+            }
+            if (keys['ArrowRight']) {
+                playerX = Math.min(460, playerX + 5);
+            }
+
+            // Gravity
+            velocityY += 0.8;
+            playerY += velocityY;
+
+            // Ground collision
+            if (playerY >= 250) {
+                playerY = 250;
+                velocityY = 0;
+                isJumping = false;
+            }
+
+            // Update player position
+            const player = document.getElementById('player');
+            player.style.left = playerX + 'px';
+            player.style.bottom = (300 - playerY - 40) + 'px';
+
+            // Check coin collection
+            coins.forEach(coin => {
+                if (!coin.collected) {
+                    const dx = playerX - coin.x;
+                    const dy = playerY - coin.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 40) {
+                        coin.collected = true;
+                        coin.element.style.display = 'none';
+                        score += 10;
+                        updateScore();
+                    }
+                }
+            });
+
+            // Check win condition
+            if (coins.every(c => c.collected)) {
+                endGame(true);
+                return;
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = `Skor: ${score}`;
+        }
+
+        function endGame(won) {
+            gameActive = false;
+            const duration = Date.now() - gameStartTime;
+
+            document.getElementById('score').textContent = 
+                won ? `✅ Tamamlandı! Skor: ${score}` : `Oyun Bitti - Skor: ${score}`;
+
+            // Send data to parent
+            setTimeout(() => {
+                window.parent.postMessage({
+                    type: 'game-complete',
+                    gameId: 'hoppa',
+                    data: {
+                        score: score,
+                        duration: duration,
+                        rawData: {
+                            coinsCollected: coins.filter(c => c.collected).length,
+                            totalCoins: coins.length
+                        }
+                    }
+                }, '*');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

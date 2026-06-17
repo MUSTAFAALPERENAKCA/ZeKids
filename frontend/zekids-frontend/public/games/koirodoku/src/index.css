@@ -1,0 +1,92 @@
+@import './colors.css';
+@import 'open-props/normalize.min.css';
+
+:root {
+  /* 
+  koirodoku colors
+  cyan-9
+  pink-6
+  yellow-5
+  teal-4
+  blue-6
+   */
+  --bg: #073b4c;
+
+}
+
+body {
+  background-image: linear-gradient(var(--bg), var(--cyan-9));
+}
+
+main {
+  height: 100dvh;
+  width: 100dvw;
+  font-family: var(--font-rounded-sans);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.board {
+  width: 90vmin;
+  height: 90vmin;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  background-color: var(--gray-2);
+  border-radius: var(--radius-2);
+  padding: var(--size-1);
+  box-shadow: var(--shadow-4);
+  animation: boing 0.5s ease-in-out forwards;
+
+
+
+  >button {
+    margin: var(--size-1);
+    border-radius: var(--radius-2);
+
+    &.editable {
+      border-radius: var(--radius-round);
+    }
+
+    &:nth-child(5),
+    &:nth-child(6),
+    &:nth-child(7),
+    &:nth-child(8) {
+      margin-bottom: var(--size-2);
+    }
+
+    &:nth-child(2),
+    &:nth-child(6),
+    &:nth-child(10),
+    &:nth-child(14) {
+      margin-right: var(--size-2);
+    }
+  }
+
+}
+
+
+@keyframes boing {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+dialog[open] {
+  width: 90vmin;
+  height: 90vmin;
+  background-color: var(--gray-2);
+  padding: var(--size-1);
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  border-radius: var(--radius-2);
+  animation: boing 0.2s ease-in-out forwards;
+
+  >button {
+    margin: var(--size-1);
+    border-radius: var(--radius-2);
+  }
+
+}

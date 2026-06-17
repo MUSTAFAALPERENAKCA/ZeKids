@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "cocoons.webp",
+			"format": "RGBA8888",
+			"size": {
+				"w": 788,
+				"h": 408
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "c0.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 197,
+						"h": 408
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 197,
+						"h": 408
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 197,
+						"h": 408
+					}
+				},
+				{
+					"filename": "c1.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 197,
+						"h": 408
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 197,
+						"h": 408
+					},
+					"frame": {
+						"x": 197,
+						"y": 0,
+						"w": 197,
+						"h": 408
+					}
+				},
+				{
+					"filename": "c2.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 197,
+						"h": 408
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 197,
+						"h": 408
+					},
+					"frame": {
+						"x": 394,
+						"y": 0,
+						"w": 197,
+						"h": 408
+					}
+				},
+				{
+					"filename": "c4.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 197,
+						"h": 408
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 197,
+						"h": 408
+					},
+					"frame": {
+						"x": 591,
+						"y": 0,
+						"w": 197,
+						"h": 408
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:23747977aa5533db2b3a596cbcc7d291:052b791300f8d7e601125100af090763:4171530b35e2e9323c2a835e2f378c5b$"
+	}
+}

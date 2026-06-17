@@ -1,0 +1,53 @@
+/* 
+ * ZeKids Theme for Bubble Shooter
+ * Tonguç-inspired energetic and colorful design
+ */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+/* ZeKids Color Palette */
+:root {
+    --zk-gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --zk-gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+/* Body - ZeKids gradient background */
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--zk-gradient-1) !important;
+    font-family: 'Nunito', sans-serif !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-height: 100vh !important;
+    overflow: hidden !important;
+}
+
+/* Canvas - ZeKids styling */
+#viewport {
+    border-radius: 24px !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3) !important;
+    background: #ffffff !important;
+    max-width: 95vw !important;
+    max-height: 95vh !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+/* Portrait orientation - optimal for bubble shooter */
+@media (orientation: portrait) {
+    #viewport {
+        width: auto !important;
+        height: 95vh !important;
+    }
+}
+
+/* Landscape orientation */
+@media (orientation: landscape) {
+    #viewport {
+        width: 95vh !important;
+        height: 95vh !important;
+    }
+}

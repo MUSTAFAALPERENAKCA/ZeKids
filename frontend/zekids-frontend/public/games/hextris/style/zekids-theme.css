@@ -1,0 +1,189 @@
+/* 
+ * ZeKids Theme for Hextris
+ * Tonguç-inspired energetic and colorful design
+ */
+
+/* Google Fonts - Fredoka for headings, Nunito for body */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+/* ZeKids Color Palette */
+:root {
+    --zk-red: #FF6B6B;
+    --zk-turquoise: #4ECDC4;
+    --zk-yellow: #FFD93D;
+    --zk-mint: #95E1D3;
+    --zk-purple: #A78BFA;
+    --zk-blue: #667eea;
+    --zk-gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --zk-gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --zk-gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* Body Background - ZeKids Gradient */
+body {
+    background: var(--zk-gradient-1) !important;
+    font-family: 'Nunito', sans-serif !important;
+}
+
+/* High Score Text - Fredoka Font */
+#HIGHSCORE,
+#highScoreInGameTextHeader {
+    font-family: 'Fredoka', sans-serif !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    font-weight: 700 !important;
+}
+
+/* Game Over Screen */
+#gameoverscreen {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+#gameOverBox {
+    font-family: 'Fredoka', sans-serif !important;
+    color: var(--zk-red) !important;
+    font-weight: 700 !important;
+    text-shadow: 0 2px 8px rgba(255, 107, 107, 0.3) !important;
+}
+
+#highScoresTitle {
+    font-family: 'Fredoka', sans-serif !important;
+    color: var(--zk-purple) !important;
+    font-weight: 600 !important;
+}
+
+/* Score Display */
+#cScore {
+    font-family: 'Fredoka', sans-serif !important;
+    color: var(--zk-turquoise) !important;
+    font-weight: 700 !important;
+    font-size: 3rem !important;
+}
+
+.score {
+    font-family: 'Nunito', sans-serif !important;
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
+}
+
+/* Restart Button - ZeKids Style */
+#restart,
+#restartBtn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15)) !important;
+}
+
+#restart:hover,
+#restartBtn:hover {
+    transform: scale(1.05) !important;
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25)) !important;
+}
+
+#restart:active,
+#restartBtn:active {
+    transform: scale(0.95) !important;
+}
+
+/* Start Button Container */
+#startBtn {
+    font-family: 'Fredoka', sans-serif !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Help Button */
+#openSideBar {
+    transition: all 0.3s ease !important;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15)) !important;
+}
+
+#openSideBar:hover {
+    transform: scale(1.1) !important;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25)) !important;
+}
+
+/* Pause Button */
+#pauseBtn {
+    transition: all 0.3s ease !important;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15)) !important;
+}
+
+#pauseBtn:hover {
+    transform: scale(1.1) !important;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25)) !important;
+}
+
+/* Canvas - Proper sizing */
+#canvas {
+    border-radius: 16px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Bottom Container */
+#bottomContainer {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding: 20px !important;
+}
+
+/* Social Share - Hide completely */
+#socialShare,
+#badges,
+#buttonCont,
+.rrssb-facebook,
+.rrssb-twitter,
+.rrssb-vk,
+.rrssb-buttons {
+    display: none !important;
+}
+
+/* High Score In Game Text */
+#highScoreInGameText {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 16px !important;
+    padding: 12px 20px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+#currentHighScore {
+    font-family: 'Fredoka', sans-serif !important;
+    color: var(--zk-purple) !important;
+    font-weight: 700 !important;
+}
+
+/* Container animations */
+#container {
+    animation: fadeIn 0.5s ease-in-out !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -45%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 480px) {
+    #cScore {
+        font-size: 2rem !important;
+    }
+    
+    #gameoverscreen {
+        border-radius: 16px !important;
+    }
+}
+
+/* Smooth transitions for all elements */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease !important;
+}

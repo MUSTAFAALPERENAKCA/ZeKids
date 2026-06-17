@@ -1,0 +1,26 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 px-4">
+  <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
+    <div class="mb-6">
+      <h1 class="text-4xl font-bold text-blue-600 mb-2">ZeKids</h1>
+    </div>
+
+    <div *ngIf="loading" class="py-8">
+      <div class="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
+      <p class="mt-4 text-gray-600">E-posta doğrulanıyor...</p>
+    </div>
+
+    <div *ngIf="success" class="py-8">
+      <div class="text-6xl mb-4">✅</div>
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">E-posta Doğrulandı!</h2>
+      <p class="text-gray-600 mb-4">Hesabınız başarıyla aktifleştirildi.</p>
+      <p class="text-sm text-gray-500">Giriş sayfasına yönlendiriliyorsunuz...</p>
+    </div>
+
+    <div *ngIf="error" class="py-8">
+      <div class="text-6xl mb-4">❌</div>
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">Doğrulama Başarısız</h2>
+      <p class="text-red-600 mb-4">{{ error }}</p>
+      <a routerLink="/auth/register" class="text-blue-600 hover:underline">Kayıt sayfasına dön</a>
+    </div>
+  </div>
+</div>

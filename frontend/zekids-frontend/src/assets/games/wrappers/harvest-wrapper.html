@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harvest Moon Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+        }
+        .farm {
+            display: grid;
+            grid-template-columns: repeat(4, 80px);
+            gap: 10px;
+            margin: 30px auto;
+            justify-content: center;
+        }
+        .plot {
+            width: 80px;
+            height: 80px;
+            background: #8b4513;
+            border: 3px solid #654321;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            transition: all 0.3s;
+        }
+        .plot:hover {
+            transform: scale(1.05);
+        }
+        .plot.planted {
+            background: #90ee90;
+        }
+        .plot.grown {
+            background: #32cd32;
+        }
+        button {
+            background: #32cd32;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #28a428;
+            transform: scale(1.05);
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #32cd32;
+            margin-top: 20px;
+        }
+        .day {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Harvest Moon (Demo)</h1>
+        <div class="day" id="day">Gün: 1 / 6</div>
+        <div class="farm" id="farm"></div>
+        <div class="score" id="score">Hasat: 0</div>
+        <button id="startBtn" onclick="startGame()">Çiftliği Başlat</button>
+        <button id="nextDayBtn" style="display:none;" onclick="nextDay()">Sonraki Gün</button>
+    </div>
+
+    <script>
+        let gameStartTime;
+        let currentDay = 1;
+        let harvest = 0;
+        let plots = [];
+        const totalDays = 6;
+
+        function startGame() {
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('nextDayBtn').style.display = 'inline-block';
+            gameStartTime = Date.now();
+            createFarm();
+        }
+
+        function createFarm() {
+            const farm = document.getElementById('farm');
+            farm.innerHTML = '';
+            plots = [];
+
+            for (let i = 0; i < 12; i++) {
+                const plot = document.createElement('div');
+                plot.className = 'plot';
+                plot.dataset.index = i;
+                plot.dataset.state = 'empty';
+                plot.addEventListener('click', () => handlePlotClick(i));
+                farm.appendChild(plot);
+                plots.push({ state: 'empty', day: 0 });
+            }
+        }
+
+        function handlePlotClick(index) {
+            const plot = document.querySelector(`[data-index="${index}"]`);
+            const plotData = plots[index];
+
+            if (plotData.state === 'empty') {
+                // Plant seed
+                plotData.state = 'planted';
+                plotData.day = currentDay;
+                plot.classList.add('planted');
+                plot.textContent = '🌱';
+            } else if (plotData.state === 'grown') {
+                // Harvest
+                harvest++;
+                plotData.state = 'empty';
+                plotData.day = 0;
+                plot.classList.remove('grown');
+                plot.textContent = '';
+                updateScore();
+            }
+        }
+
+        function nextDay() {
+            if (currentDay >= totalDays) {
+                endGame();
+                return;
+            }
+
+            currentDay++;
+            document.getElementById('day').textContent = `Gün: ${currentDay} / ${totalDays}`;
+
+            // Grow plants
+            plots.forEach((plotData, index) => {
+                if (plotData.state === 'planted' && currentDay - plotData.day >= 2) {
+                    plotData.state = 'grown';
+                    const plot = document.querySelector(`[data-index="${index}"]`);
+                    plot.classList.remove('planted');
+                    plot.classList.add('grown');
+                    plot.textContent = '🌾';
+                }
+            });
+
+            if (currentDay === totalDays) {
+                setTimeout(endGame, 1000);
+            }
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = `Hasat: ${harvest}`;
+        }
+
+        function endGame() {
+            const duration = Date.now() - gameStartTime;
+            const score = harvest * 10; // Her hasat 10 puan
+
+            document.getElementById('day').textContent = '✅ Festival Günü!';
+            document.getElementById('nextDayBtn').style.display = 'none';
+            document.getElementById('score').textContent = `Final Skor: ${score} (${harvest} hasat)`;
+
+            // Send data to parent
+            setTimeout(() => {
+                window.parent.postMessage({
+                    type: 'game-complete',
+                    gameId: 'harvest-moon',
+                    data: {
+                        score: score,
+                        duration: duration,
+                        rawData: {
+                            harvest: harvest,
+                            days: totalDays
+                        }
+                    }
+                }, '*');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

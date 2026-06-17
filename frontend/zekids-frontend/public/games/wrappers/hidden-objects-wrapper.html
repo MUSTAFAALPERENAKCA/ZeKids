@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gizli Nesneleri Bul - ZeKids</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+        #iframe-wrapper {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            width: 303%;
+            height: 303%;
+            border: none;
+            zoom: 0.33;
+        }
+        #exit-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+        #exit-overlay.active {
+            display: flex;
+        }
+        .exit-message {
+            color: white;
+            font-family: 'Nunito', sans-serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .exit-buttons {
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .btn-continue {
+            background: #4CAF50;
+            color: white;
+        }
+        .btn-save-exit {
+            background: #FF9800;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="iframe-wrapper">
+        <div id="iframe-scaler">
+            <iframe id="game-frame" src="../hidden-objects/gamePage.html"></iframe>
+        </div>
+    </div>
+    
+    <div id="exit-overlay">
+        <div class="exit-message">
+            🔍 İlerlemenizi kaydetmek ister misiniz?
+        </div>
+        <div class="exit-buttons">
+            <button class="btn-continue" onclick="continueGame()">Devam Et</button>
+            <button class="btn-save-exit" onclick="saveAndExit()">Kaydet ve Çık</button>
+        </div>
+    </div>
+
+    <script>
+        let gameStartTime = Date.now();
+        let reactionTimes = [];
+        let currentScore = 0;
+        let gameActive = true;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && gameActive) {
+                showExitOverlay();
+            }
+        });
+
+        function showExitOverlay() {
+            document.getElementById('exit-overlay').classList.add('active');
+            gameActive = false;
+        }
+
+        function continueGame() {
+            document.getElementById('exit-overlay').classList.remove('active');
+            gameActive = true;
+        }
+
+        function saveAndExit() {
+            const duration = Math.floor((Date.now() - gameStartTime) / 1000);
+            
+            window.parent.postMessage({
+                type: 'game-complete',
+                data: {
+                    score: currentScore,
+                    duration: duration,
+                    reactionTimes: reactionTimes.length > 0 ? reactionTimes : [duration * 100],
+                    rawData: {
+                        earlyExit: true,
+                        completionRate: Math.min(100, (duration / 180) * 100)
+                    }
+                }
+            }, '*');
+        }
+
+        // Simüle edilmiş veri
+        setInterval(() => {
+            if (gameActive) {
+                currentScore += Math.floor(Math.random() * 5);
+                reactionTimes.push(400 + Math.random() * 600);
+            }
+        }, 6000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!-- TONGUÇ AKADEMİ TARZI - ENERJİK GELİŞİM RAPORU -->
+<div class="min-h-screen bg-brand-bg">
+  
+  <!-- Header - Motivasyon Dolu -->
+  <header class="bg-white border-b-4 border-brand-secondary/20 sticky top-0 z-40 shadow-soft">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a routerLink="/dashboard" class="w-14 h-14 bg-gradient-to-br from-brand-secondary to-purple-600 rounded-2xl flex items-center justify-center hover:scale-110 transform transition shadow-glow-blue group">
+            <svg class="w-7 h-7 text-white group-hover:-translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+          </a>
+          
+          <div>
+            <h1 class="text-4xl font-black text-gray-900 font-display flex items-center">
+              <span class="text-5xl mr-3">📊</span>
+              Gelişim Raporu
+            </h1>
+            <p class="text-lg font-bold text-brand-secondary">Klinik analiz ve süper gelişim takibi! 🚀</p>
+          </div>
+        </div>
+        
+        <button class="relative group overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-500 rounded-3xl blur-md opacity-75 group-hover:opacity-100 transition"></div>
+          <div class="relative bg-gradient-to-r from-green-500 to-emerald-500 text-white px-8 py-4 rounded-3xl font-black text-lg shadow-xl hover:scale-105 active:scale-95 transition flex items-center space-x-2">
+            <span>📥</span>
+            <span>Raporu İndir</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <!-- Loading State - Animasyonlu -->
+    <div *ngIf="loading" class="flex flex-col justify-center items-center py-20">
+      <div class="text-8xl mb-8 animate-bounce">📊</div>
+      <div class="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-brand-secondary mb-4"></div>
+      <p class="text-2xl font-black text-gray-700">Raporunuz Hazırlanıyor...</p>
+    </div>
+
+    <!-- İçerik -->
+    <div *ngIf="!loading">
+      
+      <!-- Çocuk Bilgisi - Enerjik Kart -->
+      <div class="relative mb-10">
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-200 to-pink-200 rounded-3xl blur-xl opacity-50"></div>
+        <div class="relative bg-white rounded-3xl shadow-2xl p-8 border-4 border-brand-secondary/20">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-6">
+              <div class="w-24 h-24 bg-gradient-to-br from-brand-secondary to-purple-600 rounded-3xl flex items-center justify-center text-5xl shadow-glow-blue">
+                🌟
+              </div>
+              <div>
+                <h1 class="text-4xl font-black text-gray-900 mb-2 font-display">{{ childName }}'in Süper Gelişimi!</h1>
+                <p class="text-xl text-gray-600 font-bold">Toplam <span class="text-brand-primary font-black text-2xl">{{ reportData?.totalGames || 0 }}</span> oyun oynandı 🎮</p>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <div class="text-7xl mb-2">🏆</div>
+              <div class="font-black text-brand-accent text-2xl">Harika!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Klinik Değerlendirme - Motivasyon Kartı -->
+      <div *ngIf="reportData?.interpretation" class="relative mb-10">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-200 to-cyan-200 rounded-3xl blur-xl opacity-50"></div>
+        <div class="relative bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 rounded-3xl shadow-2xl p-10 border-4 border-brand-secondary">
+          <div class="flex items-start space-x-6">
+            <div class="text-8xl">{{ getInterpretationIcon(reportData.interpretation) }}</div>
+            <div class="flex-1">
+              <div class="flex items-center space-x-3 mb-4">
+                <div class="text-3xl">🩺</div>
+                <h2 class="text-3xl font-black text-gray-900 font-display">Klinik Değerlendirme</h2>
+              </div>
+              <p [class]="'text-2xl font-bold leading-relaxed ' + getInterpretationColor(reportData.interpretation)">
+                {{ reportData.interpretation }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Veri Yok Mesajı - Motivasyon Dolu -->
+      <div *ngIf="!reportData?.logs || reportData.logs.length === 0" class="relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-yellow-200 to-orange-200 rounded-3xl blur-xl opacity-50"></div>
+        <div class="relative bg-gradient-to-br from-yellow-50 to-orange-50 border-4 border-brand-accent rounded-3xl p-12 text-center shadow-2xl">
+          <div class="text-9xl mb-6 animate-bounce">🎯</div>
+          <h3 class="text-4xl font-black text-gray-900 mb-4 font-display">Hadi Başlayalım!</h3>
+          <p class="text-2xl text-gray-700 mb-8 font-bold">Gelişim raporunu görmek için oyunlara başla ve süper becerilerini keşfet! 🚀</p>
+          <a routerLink="/games" class="relative inline-block group">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-primary to-brand-accent rounded-3xl blur-lg opacity-75 group-hover:opacity-100 transition animate-pulse"></div>
+            <div class="relative bg-gradient-to-r from-brand-primary to-brand-accent text-white px-12 py-6 rounded-3xl font-black text-2xl shadow-2xl hover:scale-105 active:scale-95 transition flex items-center space-x-3">
+              <span>🎮</span>
+              <span>Oyunlara Git</span>
+              <span>→</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grafikler - Renkli ve Enerjik -->
+      <div *ngIf="reportData?.logs && reportData.logs.length > 0" class="grid md:grid-cols-2 gap-10 mb-10">
+        
+        <!-- MRT Grafik - Mavi Tema -->
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-200 to-cyan-200 rounded-3xl blur-xl opacity-50"></div>
+          <div class="relative bg-white rounded-3xl shadow-2xl p-8 border-4 border-brand-secondary/20 hover:border-brand-secondary transition-all hover:-translate-y-2">
+            <div class="flex items-center space-x-3 mb-6">
+              <div class="text-5xl">⏱️</div>
+              <h3 class="text-3xl font-black text-gray-900 font-display">MRT Grafiği</h3>
+            </div>
+            
+            <div class="bg-blue-50 rounded-2xl p-4 mb-6 border-2 border-blue-200">
+              <p class="text-lg text-gray-700 font-bold flex items-center">
+                <span class="text-2xl mr-2">💡</span>
+                Düşük MRT = Daha Hızlı Tepki! ⚡
+              </p>
+            </div>
+            
+            <canvas baseChart
+              [data]="mrtChartData"
+              [options]="mrtChartOptions"
+              [type]="'line'">
+            </canvas>
+          </div>
+        </div>
+
+        <!-- RTV Grafik - Mor Tema -->
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-purple-200 to-pink-200 rounded-3xl blur-xl opacity-50"></div>
+          <div class="relative bg-white rounded-3xl shadow-2xl p-8 border-4 border-purple-300/50 hover:border-purple-500 transition-all hover:-translate-y-2">
+            <div class="flex items-center space-x-3 mb-6">
+              <div class="text-5xl">📈</div>
+              <h3 class="text-3xl font-black text-gray-900 font-display">RTV Grafiği</h3>
+            </div>
+            
+            <div class="bg-purple-50 rounded-2xl p-4 mb-6 border-2 border-purple-200">
+              <p class="text-lg text-gray-700 font-bold flex items-center">
+                <span class="text-2xl mr-2">🎯</span>
+                Düşük RTV = Süper Odaklanma! 🌟
+              </p>
+            </div>
+            
+            <canvas baseChart
+              [data]="rtvChartData"
+              [options]="rtvChartOptions"
+              [type]="'line'">
+            </canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Table -->
+      <div *ngIf="reportData?.logs && reportData.logs.length > 0" class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-6 border-b border-gray-200">
+          <h3 class="text-xl font-bold text-gray-900">Detaylı Oyun Geçmişi</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Tarih
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Oyun
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  MRT (ms)
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  RTV (ms)
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Durum
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <tr *ngFor="let log of reportData.logs">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {{ log.createdAt | date:'dd/MM/yyyy HH:mm' }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {{ log.gameId }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  <span class="font-medium" [class.text-green-600]="log.mrt < 400" [class.text-blue-600]="log.mrt >= 400 && log.mrt < 500" [class.text-yellow-600]="log.mrt >= 500">
+                    {{ log.mrt?.toFixed(1) || '-' }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  <span class="font-medium" [class.text-green-600]="log.rtv < 50" [class.text-blue-600]="log.rtv >= 50 && log.rtv < 80" [class.text-yellow-600]="log.rtv >= 80">
+                    {{ log.rtv?.toFixed(1) || '-' }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span *ngIf="log.rtv < 50" class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                    Mükemmel
+                  </span>
+                  <span *ngIf="log.rtv >= 50 && log.rtv < 80" class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                    İyi
+                  </span>
+                  <span *ngIf="log.rtv >= 80 && log.rtv < 120" class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                    Orta
+                  </span>
+                  <span *ngIf="log.rtv >= 120" class="px-2 py-1 text-xs font-semibold rounded-full bg-orange-100 text-orange-800">
+                    Geliştirilmeli
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Info Cards -->
+      <div class="grid md:grid-cols-3 gap-6 mt-6">
+        <div class="bg-blue-50 rounded-lg p-6">
+          <div class="text-3xl mb-2">📊</div>
+          <h4 class="font-bold text-gray-900 mb-2">MRT Nedir?</h4>
+          <p class="text-sm text-gray-600">
+            Mean Reaction Time (Ortalama Tepki Süresi), bir uyarana ne kadar hızlı tepki verildiğini gösterir.
+          </p>
+        </div>
+
+        <div class="bg-purple-50 rounded-lg p-6">
+          <div class="text-3xl mb-2">🎯</div>
+          <h4 class="font-bold text-gray-900 mb-2">RTV Nedir?</h4>
+          <p class="text-sm text-gray-600">
+            Reaction Time Variability (Tepki Süresi Değişkenliği), dikkat tutarlılığını ölçer. DEHB'nin ana göstergesidir.
+          </p>
+        </div>
+
+        <div class="bg-green-50 rounded-lg p-6">
+          <div class="text-3xl mb-2">💪</div>
+          <h4 class="font-bold text-gray-900 mb-2">Nasıl Geliştirilir?</h4>
+          <p class="text-sm text-gray-600">
+            Düzenli oyun pratikleri ile RTV değeri zamanla düşer ve dikkat tutarlılığı artar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

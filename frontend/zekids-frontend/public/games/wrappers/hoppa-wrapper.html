@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoppa Platformer - ZeKids</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+        #game-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .message {
+            text-align: center;
+            color: white;
+            font-family: 'Nunito', sans-serif;
+            padding: 40px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            max-width: 600px;
+        }
+        .message h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .message p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: white;
+            color: #333;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div class="message">
+            <h1>🐰 Hoppa Platformer</h1>
+            <p>Bu oyun Service Worker kullandığı için ZeKids platformunda şu an çalışamıyor.</p>
+            <p style="font-size: 16px; opacity: 0.8;">Oyun geliştiricisi ile uyumlu bir versiyon üzerinde çalışıyoruz.</p>
+            <button onclick="exitGame()">🚪 Oyun Menüsüne Dön</button>
+        </div>
+    </div>
+
+    <script>
+        let startTime = Date.now();
+        
+        function exitGame() {
+            const duration = Math.floor((Date.now() - startTime) / 1000);
+            
+            window.parent.postMessage({
+                type: 'game-complete',
+                data: {
+                    score: 0,
+                    duration: duration,
+                    reactionTimes: [500],
+                    rawData: {
+                        error: 'Service Worker not supported in iframe',
+                        attempted: true
+                    }
+                }
+            }, '*');
+        }
+    </script>
+</body>
+</html>

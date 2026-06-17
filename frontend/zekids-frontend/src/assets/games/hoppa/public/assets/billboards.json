@@ -1,0 +1,755 @@
+{
+	"textures": [
+		{
+			"image": "billboards.webp",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1344,
+				"h": 1100
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Billboard1.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard2.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 192,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard3.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 384,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard4.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 576,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard5.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 768,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard6.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 960,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard7.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 1152,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard8.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 0,
+						"y": 220,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard9.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 192,
+						"y": 220,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard10.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 384,
+						"y": 220,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard11.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 576,
+						"y": 220,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard12.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 768,
+						"y": 220,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard13.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 960,
+						"y": 220,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard14.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 1152,
+						"y": 220,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard15.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 0,
+						"y": 440,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard16.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 192,
+						"y": 440,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard17.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 384,
+						"y": 440,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard18.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 576,
+						"y": 440,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard19.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 768,
+						"y": 440,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard20.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 960,
+						"y": 440,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard21.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 1152,
+						"y": 440,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard22.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 0,
+						"y": 660,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard23.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 192,
+						"y": 660,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard24.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 384,
+						"y": 660,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard25.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 576,
+						"y": 660,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard26.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 768,
+						"y": 660,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard27.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 960,
+						"y": 660,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard28.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 1152,
+						"y": 660,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard29.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 0,
+						"y": 880,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard30.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 192,
+						"y": 880,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard31.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 384,
+						"y": 880,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard32.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 576,
+						"y": 880,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard33.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 768,
+						"y": 880,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard34.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 960,
+						"y": 880,
+						"w": 192,
+						"h": 220
+					}
+				},
+				{
+					"filename": "Billboard35.webp",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 192,
+						"h": 220
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 192,
+						"h": 220
+					},
+					"frame": {
+						"x": 1152,
+						"y": 880,
+						"w": 192,
+						"h": 220
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:5a1bdef549fc6cffff3d1ec253818ddd:04d648b8adc833570119401db7b86bcf:dd3995bac6cdab6328d15619c87ae5a2$"
+	}
+}

@@ -1,0 +1,35 @@
+.empty {
+  background-color: var(--sand-2);
+}
+
+.pink {
+  background-color: var(--pink-6);
+
+  &:hover {
+    background-color: var(--pink-4);
+  }
+}
+
+.yellow {
+  background-color: var(--yellow-5);
+
+  &:hover {
+    background-color: var(--yellow-3);
+  }
+}
+
+.teal {
+  background-color: var(--teal-4);
+
+  &:hover {
+    background-color: var(--teal-2);
+  }
+}
+
+.blue {
+  background-color: var(--blue-6);
+
+  &:hover {
+    background-color: var(--blue-4);
+  }
+}

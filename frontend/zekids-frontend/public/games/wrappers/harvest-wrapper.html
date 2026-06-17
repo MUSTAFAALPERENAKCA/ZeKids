@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harvest Moon - ZeKids</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+        #game-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .loading {
+            text-align: center;
+            color: white;
+            font-family: 'Nunito', sans-serif;
+        }
+        .loading h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .loading p {
+            font-size: 24px;
+            opacity: 0.8;
+        }
+        .spinner {
+            margin: 30px auto;
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .error {
+            background: #f44336;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 600px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: white;
+            color: #333;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div class="loading">
+            <h1>🌾 Harvest Moon</h1>
+            <div class="spinner"></div>
+            <p>Oyun yükleniyor...</p>
+            <p style="margin-top: 10px; font-size: 14px; opacity: 0.6;">
+                Bu oyun modül formatında olduğu için yüklenemedi.<br>
+                ZeKids platformu için özel bir versiyon hazırlanıyor.
+            </p>
+            <button onclick="exitGame()">🚪 Geri Dön</button>
+        </div>
+    </div>
+
+    <script>
+        let startTime = Date.now();
+        
+        function exitGame() {
+            const duration = Math.floor((Date.now() - startTime) / 1000);
+            
+            window.parent.postMessage({
+                type: 'game-complete',
+                data: {
+                    score: 0,
+                    duration: duration,
+                    reactionTimes: [500],
+                    rawData: {
+                        error: 'Module format not supported',
+                        attempted: true
+                    }
+                }
+            }, '*');
+        }
+
+        // 10 saniye sonra otomatik geri dön
+        setTimeout(() => {
+            document.querySelector('.loading p').textContent = 'Oyun menüsüne yönlendiriliyorsunuz...';
+            setTimeout(exitGame, 2000);
+        }, 10000);
+    </script>
+</body>
+</html>

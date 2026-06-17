@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hextris - ZeKids</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { 
+            width: 100%; 
+            height: 100%; 
+            overflow: hidden; 
+            /* ZeKids gradient */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        #game-container {
+            width: 56.25vh; /* 9:16 dikine format */
+            height: 100vh;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+        }
+        /* SOSYAL MEDYA VE İNDİRME LİNKLERİNİ GİZLE */
+        #game-frame::part(body) #socialShare,
+        #game-frame::part(body) #badges,
+        #game-frame::part(body) #buttonCont,
+        #game-frame::part(body) .rrssb-facebook,
+        #game-frame::part(body) .rrssb-twitter,
+        #game-frame::part(body) .rrssb-vk {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <iframe id="game-frame" src="../hextris/index.html"></iframe>
+    </div>
+
+    <script>
+        // ESC tuşu ile erken çıkış
+        let gameStartTime = Date.now();
+        let gameData = {
+            gameName: 'Hextris',
+            score: 0,
+            duration: 0,
+            completed: false
+        };
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                gameData.duration = Math.floor((Date.now() - gameStartTime) / 1000);
+                gameData.completed = false;
+                
+                if (window.parent !== window) {
+                    window.parent.postMessage({
+                        type: 'GAME_EXIT',
+                        data: gameData
+                    }, '*');
+                }
+            }
+        });
+
+        // Oyun içinden mesaj dinle (eğer oyun postMessage gönderirse)
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'GAME_COMPLETE') {
+                gameData.score = event.data.score || 0;
+                gameData.duration = Math.floor((Date.now() - gameStartTime) / 1000);
+                gameData.completed = true;
+                
+                if (window.parent !== window) {
+                    window.parent.postMessage({
+                        type: 'GAME_COMPLETE',
+                        data: gameData
+                    }, '*');
+                }
+            }
+        });
+
+        // Iframe yüklendikten sonra sosyal medya linklerini gizle
+        const iframe = document.getElementById('game-frame');
+        iframe.addEventListener('load', function() {
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                
+                // CSS enjekte et
+                const style = iframeDoc.createElement('style');
+                style.textContent = `
+                    #socialShare,
+                    #badges,
+                    #buttonCont,
+                    .rrssb-facebook,
+                    .rrssb-twitter,
+                    .rrssb-vk,
+                    .rrssb-buttons,
+                    #androidBadge,
+                    #iOSBadge {
+                        display: none !important;
+                        visibility: hidden !important;
+                    }
+                `;
+                iframeDoc.head.appendChild(style);
+            } catch (e) {
+                console.log('Cross-origin iframe, CSS injection skipped');
+            }
+        });
+    </script>
+</body>
+</html>

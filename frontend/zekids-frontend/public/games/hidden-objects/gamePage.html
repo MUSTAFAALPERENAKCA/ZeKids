@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find The Hidden Object</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body class="game-page">
+  <div class="bg-img">
+    <img class="game-img" src="modifiedImg1Cropped.jpg" alt="bg-img" />
+    <div class="btns-hidden">
+      <button  id="eggs-hidden" class="cross-eggs hidden-obj">Eggs</button>
+      <button id="hedgehog-hidden" class="cross-hedgehog hidden-obj">Hedgehog</button>
+      <button id="cricket-hidden" class="cross-cricket hidden-obj">Cricket</button>
+      <button id="flower-hidden" class="cross-flower hidden-obj">Flower</button>
+      <button id="dragonfly-hidden" class="cross-dragonfly hidden-obj">Dragonfly</button>
+      <button id="fish-hidden" class="cross-fish hidden-obj">Fish</button>
+      <button id="spider-hidden" class="cross-spider hidden-obj">Spider</button>
+      <button id="worm-hidden" class="cross-worm hidden-obj">Worm</button>
+      <button id="bird-hidden" class="cross-bird hidden-obj">Bird</button>
+      <button id="grasshoppers-hidden" class="cross-grasshopper hidden-obj">Grasshopper</button>
+    </div>
+    <div class="divs-found">
+      <div id="eggs-found" class="cross-eggs">/</div>
+      <div id="hedgehog-found" class="cross-hedgehog">/</div>
+      <div id="cricket-found" class="cross-cricket">/</div>
+      <div id="flower-found" class="cross-flower">/</div>
+      <div id="dragonfly-found" class="cross-dragonfly">/</div>
+      <div id="fish-found" class="cross-fish">/</div>
+      <div id="spider-found" class="cross-spider">/</div>
+      <div id="worm-found" class="cross-worm">/</div>
+      <div id="bird-found" class="cross-bird">/</div>
+      <div id="grasshopper-found" class="cross-grasshopper">/</div>
+    </div>
+    <div class="message-box">
+      <button class="message-btn"></button>
+    </div>
+    <div class="end-slide">
+      <div class="end-content">
+        <h2 id="win-lose"></h2>
+        <br>
+        <h2 id="if-found-all"></h2>
+        <br>
+        <h3>
+          Would you like to play again?</h3>
+        <button class="play-again"><a href="gamePage.html">Play Again</a></button>
+        <button class="exit"><a href="index.html">EXIT</a></button>
+      </div>
+    </div>
+  </div>
+  <div id="timer">
+    <h4 id="time">5:00</h4>
+    <button class="side-exit"><a class="side-exit" href="index.html">EXIT</a></button>
+  </div>
+</body>
+</html>

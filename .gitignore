@@ -1,0 +1,13 @@
+# .NET
+backend/**/bin/
+backend/**/obj/
+*.user
+
+# Sensitive local config
+backend/ZeKids.API/appsettings.Development.json
+
+# Node (root-level, in case anything is installed outside frontend/)
+node_modules/
+
+# System files
+.DS_Store

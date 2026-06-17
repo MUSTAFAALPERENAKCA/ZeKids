@@ -1,0 +1,62 @@
+/* 
+ * ZeKids Theme for Simon 2020
+ * Tonguç-inspired energetic and colorful design
+ */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+/* ZeKids Color Palette */
+:root {
+    --zk-red: #FF6B6B;
+    --zk-turquoise: #4ECDC4;
+    --zk-yellow: #FFD93D;
+    --zk-mint: #95E1D3;
+    --zk-purple: #A78BFA;
+    --zk-blue: #667eea;
+    --zk-gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --zk-gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+/* Body Background - ZeKids Gradient */
+body {
+    background: var(--zk-gradient-1) !important;
+    font-family: 'Nunito', sans-serif !important;
+    overflow: hidden !important;
+}
+
+/* Game Container */
+#container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Game Canvas/Element - Add ZeKids styling */
+#game canvas {
+    border-radius: 24px !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Smooth animations */
+* {
+    font-family: 'Nunito', sans-serif !important;
+}
+
+/* Portrait orientation optimization */
+@media (orientation: portrait) {
+    #game {
+        width: 100% !important;
+        max-width: 90vh !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* Landscape orientation optimization */
+@media (orientation: landscape) {
+    #game {
+        height: 95vh !important;
+        width: auto !important;
+        margin: 0 auto !important;
+    }
+}

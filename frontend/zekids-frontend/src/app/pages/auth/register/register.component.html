@@ -1,0 +1,214 @@
+<!-- TONGUÇ AKADEMİ TARZI - ENERJİK KAYIT SAYFASI -->
+<div class="min-h-screen flex">
+  
+  <!-- Sol Taraf - Branding ve Motivasyon -->
+  <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-brand-secondary via-blue-600 to-purple-600 p-12 flex-col justify-between relative overflow-hidden">
+    
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute bottom-20 left-20 w-96 h-96 bg-cyan-300 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    </div>
+    
+    <!-- Pattern -->
+    <div class="absolute inset-0 opacity-10 pattern-dots"></div>
+    
+    <!-- Üst Kısım - Logo ve Başlık -->
+    <div class="relative z-10">
+      <div class="flex items-center space-x-4 mb-16">
+        <div class="w-16 h-16 bg-white rounded-3xl flex items-center justify-center shadow-2xl transform hover:rotate-12 transition">
+          <span class="text-3xl font-black text-brand-secondary">Z</span>
+        </div>
+        <div>
+          <div class="text-4xl font-black text-white font-display">ZeKids</div>
+          <div class="text-sm font-bold text-white/80">Dijital Terapötik</div>
+        </div>
+      </div>
+      
+      <div class="space-y-6">
+        <div class="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-lg rounded-full border border-white/30">
+          <span class="w-3 h-3 bg-green-400 rounded-full mr-3 animate-ping"></span>
+          <span class="text-white font-black text-sm">🎁 İlk 14 Gün Tamamen Bedava!</span>
+        </div>
+        
+        <h2 class="text-5xl font-black text-white leading-tight font-display">
+          Çocuğunuzun<br>
+          <span class="text-brand-accent">Dikkat Gelişimini</span><br>
+          Bilimle Keşfedin! 🚀
+        </h2>
+        
+        <p class="text-2xl text-white/90 leading-relaxed font-semibold">
+          Klinik onaylı testler ve eğlenceli oyunlarla DEHB yönetiminde yeni nesil platform!
+        </p>
+      </div>
+    </div>
+    
+    <!-- Alt Kısım - Özellikler -->
+    <div class="relative z-10 space-y-4">
+      <div class="flex items-center space-x-4 bg-white/15 backdrop-blur-xl rounded-2xl p-5 border-2 border-white/30 hover:bg-white/25 transition">
+        <div class="w-12 h-12 bg-green-400 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 shadow-lg">
+          ✓
+        </div>
+        <span class="text-white font-bold text-lg">5 Dikkat Oyunu • Bilimsel & Eğlenceli</span>
+      </div>
+      
+      <div class="flex items-center space-x-4 bg-white/15 backdrop-blur-xl rounded-2xl p-5 border-2 border-white/30 hover:bg-white/25 transition">
+        <div class="w-12 h-12 bg-green-400 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 shadow-lg">
+          ✓
+        </div>
+        <span class="text-white font-bold text-lg">AES-256 Şifreleme • Güvenli & Koruma</span>
+      </div>
+      
+      <div class="flex items-center space-x-4 bg-white/15 backdrop-blur-xl rounded-2xl p-5 border-2 border-white/30 hover:bg-white/25 transition">
+        <div class="w-12 h-12 bg-green-400 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 shadow-lg">
+          ✓
+        </div>
+        <span class="text-white font-bold text-lg">14 Gün Ücretsiz • Kredi Kartı Yok</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sağ Taraf - Form -->
+  <div class="flex-1 flex items-center justify-center p-8 bg-brand-bg">
+    <div class="w-full max-w-lg">
+      
+      <!-- Ana Sayfaya Dön Linki -->
+      <a routerLink="/" class="inline-flex items-center text-gray-600 hover:text-brand-secondary mb-10 transition group font-bold">
+        <svg class="w-6 h-6 mr-2 group-hover:-translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Ana Sayfaya Dön
+      </a>
+      
+      <!-- Form Kartı -->
+      <div class="bg-white rounded-3xl p-10 shadow-2xl border-4 border-gray-100">
+        
+        <div class="mb-10 text-center">
+          <div class="text-6xl mb-4 animate-bounce">🎉</div>
+          <h1 class="text-4xl font-black text-gray-900 mb-3 font-display">Hadi Başlayalım!</h1>
+          <p class="text-lg text-gray-600 font-semibold">İlk 14 gün tamamen bedava, kredi kartı gerekmez! 🎁</p>
+        </div>
+
+        <!-- Başarı Mesajı -->
+        <div *ngIf="success" class="bg-gradient-to-r from-green-50 to-emerald-50 border-4 border-green-200 rounded-3xl p-8 mb-6 animate-fade-in shadow-xl">
+          <div class="flex items-start">
+            <div class="text-5xl mr-4">🎉</div>
+            <div>
+              <p class="font-black text-green-900 mb-2 text-2xl">Kayıt Başarılı!</p>
+              <p class="text-lg text-green-700 font-semibold">Lütfen e-postanızı kontrol edin ve doğrulama linkine tıklayın. 📧</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <form *ngIf="!success" (ngSubmit)="onSubmit()" class="space-y-6">
+          
+          <!-- Hata Mesajı -->
+          <div *ngIf="error" class="bg-red-50 border-4 border-red-200 text-red-700 px-6 py-4 rounded-2xl animate-fade-in shadow-lg">
+            <div class="flex items-center">
+              <span class="text-3xl mr-3">⚠️</span>
+              <span class="font-bold">{{ error }}</span>
+            </div>
+          </div>
+
+          <!-- E-posta -->
+          <div>
+            <label class="block text-gray-900 font-black mb-3 text-lg">📧 E-posta Adresiniz</label>
+            <input 
+              type="email" 
+              [(ngModel)]="email" 
+              name="email"
+              required
+              class="w-full px-6 py-4 text-lg border-3 border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-brand-secondary/30 focus:border-brand-secondary transition font-semibold"
+              placeholder="ornek@email.com"
+            />
+          </div>
+
+          <!-- Şifre -->
+          <div>
+            <label class="block text-gray-900 font-black mb-3 text-lg">🔒 Güçlü Bir Şifre Oluşturun</label>
+            <input 
+              type="password" 
+              [(ngModel)]="password" 
+              name="password"
+              required
+              class="w-full px-6 py-4 text-lg border-3 border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-brand-secondary/30 focus:border-brand-secondary transition font-semibold"
+              placeholder="En az 8 karakter, 1 büyük harf, 1 rakam"
+            />
+          </div>
+
+          <!-- Şifre Tekrar -->
+          <div>
+            <label class="block text-gray-900 font-black mb-3 text-lg">🔒 Şifrenizi Tekrarlayın</label>
+            <input 
+              type="password" 
+              [(ngModel)]="confirmPassword" 
+              name="confirmPassword"
+              required
+              class="w-full px-6 py-4 text-lg border-3 border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-brand-secondary/30 focus:border-brand-secondary transition font-semibold"
+              placeholder="Aynı şifreyi tekrar girin"
+            />
+          </div>
+
+          <!-- Kullanım Şartları -->
+          <div class="flex items-start bg-blue-50 p-5 rounded-2xl border-2 border-blue-200">
+            <input type="checkbox" required class="mt-1.5 mr-4 w-5 h-5 text-brand-secondary border-gray-300 rounded-lg focus:ring-brand-secondary focus:ring-2">
+            <p class="text-sm text-gray-700 font-semibold">
+              <a href="#" class="text-brand-secondary hover:underline font-black">Kullanım Şartları</a> ve 
+              <a href="#" class="text-brand-secondary hover:underline font-black">Gizlilik Politikası</a>'nı okudum ve kabul ediyorum ✓
+            </p>
+          </div>
+
+          <!-- Kayıt Butonu -->
+          <button 
+            type="submit" 
+            [disabled]="loading"
+            class="relative w-full group/btn overflow-hidden"
+          >
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-secondary to-purple-600 rounded-3xl blur-lg opacity-75 group-hover/btn:opacity-100 transition animate-pulse"></div>
+            <div class="relative bg-gradient-to-r from-brand-secondary to-purple-600 text-white px-10 py-5 rounded-3xl font-black text-xl shadow-2xl hover:scale-105 active:scale-95 transform transition flex items-center justify-center space-x-3">
+              <span *ngIf="!loading" class="flex items-center space-x-3">
+                <span>🎁</span>
+                <span>Ücretsiz Hesap Oluştur</span>
+                <span>→</span>
+              </span>
+              <span *ngIf="loading" class="flex items-center justify-center space-x-3">
+                <svg class="animate-spin h-6 w-6" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Kaydediliyor...</span>
+              </span>
+            </div>
+          </button>
+        </form>
+
+        <!-- Giriş Linki -->
+        <div class="mt-10 text-center pt-8 border-t-4 border-gray-100">
+          <p class="text-gray-700 text-lg font-semibold">
+            Zaten hesabınız var mı? 
+            <a routerLink="/auth/login" class="text-brand-primary hover:text-brand-primary/80 font-black transition">
+              Giriş Yap 🔑
+            </a>
+          </p>
+        </div>
+      </div>
+      
+      <!-- Güven Badge'leri -->
+      <div class="mt-8 grid grid-cols-3 gap-3">
+        <div class="flex flex-col items-center space-y-2 bg-white px-3 py-4 rounded-2xl shadow-soft">
+          <span class="text-3xl">🔒</span>
+          <span class="text-xs font-bold text-gray-700 text-center">Güvenli Ödeme</span>
+        </div>
+        <div class="flex flex-col items-center space-y-2 bg-white px-3 py-4 rounded-2xl shadow-soft">
+          <span class="text-3xl">✓</span>
+          <span class="text-xs font-bold text-gray-700 text-center">KVKK Uyumlu</span>
+        </div>
+        <div class="flex flex-col items-center space-y-2 bg-white px-3 py-4 rounded-2xl shadow-soft">
+          <span class="text-3xl">🎁</span>
+          <span class="text-xs font-bold text-gray-700 text-center">14 Gün Bedava</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
